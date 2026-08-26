@@ -71,16 +71,43 @@
   object-position: center top;
   filter: grayscale(1) contrast(1.16);
   mix-blend-mode: screen;
-  mask-image: radial-gradient(ellipse 60% 56% at 50% 42%, #000 48%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 60% 56% at 50% 42%, #000 48%, transparent 100%);
+  mask-image: radial-gradient(
+    ellipse 60% 56% at 50% 42%,
+    #000 48%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 60% 56% at 50% 42%,
+    #000 48%,
+    transparent 100%
+  );
   animation: rise-image 1s 0.15s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.heroCopy {
+.heroBottomRow {
+  grid-column: 1 / -1;
   z-index: 3;
-  max-width: 705px;
+  align-self: end;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(30px, 4vw, 70px);
   padding: 0 0 0 10px;
   animation: fade-in 0.8s 0.5s both;
+}
+
+.heroCopy {
+  max-width: 705px;
+  padding: 0;
+}
+
+.ghWrap {
+  flex: 0 0 720px;
+  width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 
 .role {
@@ -105,19 +132,10 @@
 }
 
 /* ── GitHub card ────────────────────────────────────────── */
-.ghWrap {
-  z-index: 3;
-  padding: 0 0 0 20px;
-  align-self: end;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
 
 .ghUser {
-  width: 444px;
+  width: 720px;
   margin-left: auto;
-  margin-bottom: 14px;
   text-align: right;
   color: #bbb;
   font-size: 13px;
@@ -125,9 +143,9 @@
 }
 
 .ghCard {
-  width: 444px;
+  width: 720px;
   margin-left: auto;
-  padding-top: 15px;
+  padding-top: 0; /* ← was 15px */
   transform-style: preserve-3d;
   transition: transform 0.22s ease-out;
   will-change: transform;
@@ -135,13 +153,14 @@
 
 .contributions {
   display: grid;
-  grid-template-columns: repeat(28, 12px);
-  grid-template-rows: repeat(7, 12px);
-  gap: 4px;
+  grid-template-columns: repeat(56, 8px);
+  grid-template-rows: repeat(6, 8px);
+  gap: 3px 5px;
+  width: max-content;
 }
 
 .months {
-  margin-top: 10px;
+  margin-top: 6px;
   display: flex;
   justify-content: space-between;
   color: #837b7b;
@@ -150,26 +169,40 @@
 }
 
 .metrics {
-  margin-top: 25px;
+  width: 720px;
+  margin-left: auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: 8px;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 101, 99, 0.18);
+  border-top: 2px solid #d5383a;
+  border-radius: 4px;
+  background: rgba(255, 101, 99, 0.04);
 }
 
 .metric strong {
   display: block;
-  font: 700 clamp(24px, 2.4vw, 42px)/1 var(--sans);
-  letter-spacing: -0.08em;
+  font: 700 clamp(18px, 1.6vw, 26px)/1 var(--sans);
+  letter-spacing: -0.04em;
+  color: #fff;
 }
 
 .metric span {
-  margin-top: 8px;
   display: block;
+  margin-top: 0;
   font: 9px var(--mono);
-  letter-spacing: 0.15em;
-  color: #999;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.2;
 }
-
 /* ── Projects preview section ───────────────────────────── */
 .projectsSection {
   background: linear-gradient(145deg, #070707 58%, #0e0707);
@@ -277,17 +310,20 @@
     height: 44vw;
   }
 
-  .heroCopy {
-    align-self: end;
-    padding: 0 16px;
-  }
-
   .role {
     margin-bottom: 25px;
   }
 
-  .ghWrap {
+  .heroBottomRow {
+    flex-direction: column;
+    align-items: flex-start;
     padding: 0 16px;
+  }
+
+  .ghWrap {
+    flex: none;
+    width: 100%;
+    align-items: flex-start;
   }
 
   .ghUser,
@@ -297,9 +333,9 @@
   }
 
   .contributions {
-    grid-template-columns: repeat(28, 8px);
-    grid-template-rows: repeat(7, 8px);
-    gap: 3px;
+    grid-template-columns: repeat(28, 6px);
+    grid-template-rows: repeat(9, 6px);
+    gap: 3px 4px;
   }
 
   .metrics {
@@ -324,5 +360,101 @@
 
   .form {
     padding: 42px 30px;
+  }
+}
+
+/* ── Hero intro animation ─────────────────────────────── */
+
+.heroNameLeft {
+  animation: heroNameFromLeft 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.heroNameRight {
+  animation: heroNameFromRight 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.heroPortraitIntro {
+  opacity: 0;
+  transform: scale(0.65);
+  transform-origin: center center;
+
+  animation: heroPortraitScale 1.25s 0.28s
+    cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.heroContentIntro {
+  opacity: 0;
+  transform: translateY(35px);
+
+  animation: heroContentReveal 1s 1.45s
+    cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+
+/* ── Name ─────────────────────────────────────────────── */
+
+@keyframes heroNameFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-65vw);
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes heroNameFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(65vw);
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* ── Portrait ────────────────────────────────────────── */
+
+@keyframes heroPortraitScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.65);
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* ── Bottom content ──────────────────────────────────── */
+
+@keyframes heroContentReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

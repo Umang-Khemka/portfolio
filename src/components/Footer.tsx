@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <Link className="footer-mark" href="/">
-        UG
+        UK
       </Link>
 
       <div className="footer-right">

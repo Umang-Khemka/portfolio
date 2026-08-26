@@ -2,3 +2,112 @@
   background: linear-gradient(145deg, #070707 58%, #0e0707);
   padding-top: 140px;
 }
+
+/* Outer visual area */
+.project-visual {
+  position: relative;
+  width: 100%;
+  height: 540px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Black curved box */
+.project-image-box {
+  position: relative;
+  width: 92%;
+  height: 440px;
+
+  background: #050505;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 32px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  isolation: isolate;
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* Shine layer */
+.project-image-box::after {
+  content: "";
+  position: absolute;
+
+  top: -40%;
+  left: -80%;
+
+  width: 45%;
+  height: 180%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.16),
+    transparent
+  );
+
+  transform: rotate(20deg);
+  pointer-events: none;
+
+  z-index: 5;
+}
+
+/* Shine on hover */
+.project-image-box:hover::after {
+  animation: projectShine 0.8s ease forwards;
+}
+
+@keyframes projectShine {
+  0% {
+    left: -80%;
+  }
+
+  100% {
+    left: 140%;
+  }
+}
+
+/* Actual project screenshot */
+.project-img {
+  position: relative;
+  z-index: 2;
+
+  width: 92%;
+  height: auto;
+
+  max-height: 430px;
+
+  object-fit: contain;
+
+  border-radius: 18px;
+
+  /*
+    This is what makes it feel like
+    the image is sitting inside the box
+    rather than perfectly fitting it.
+  */
+  transform: rotate(-2deg) translateY(-4px);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.45);
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s ease;
+}
+
+/* Slight movement when hovering */
+.project-image-box:hover .project-img {
+  transform: rotate(-1deg) translateY(-10px) scale(1.025);
+
+  box-shadow:
+    0 28px 60px rgba(0, 0, 0, 0.55);
+}

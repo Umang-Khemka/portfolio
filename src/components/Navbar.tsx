@@ -40,7 +40,7 @@ export default function Navbar() {
   return (
     <nav className={navClass}>
       <Link className="nav-mark" href="/">
-        UG
+        UK
       </Link>
 
       <ul className="nav-links">
