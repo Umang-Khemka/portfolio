@@ -1,0 +1,143 @@
+.heroSection {
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--line);
+}
+
+.heroHeading {
+  font: 700 clamp(56px, 9.5vw, 128px)/0.98 var(--sans);
+  letter-spacing: -0.04em;
+  margin: 30px 0 0;
+}
+
+.expSection {
+  padding-top: 90px;
+}
+
+.expEntry {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 50px;
+  padding: 34px;
+  border-radius: 24px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 60px;
+  transition: background-color 0.4s ease;
+}
+
+.expEntry:hover {
+  background-color: #ffffff0d;
+}
+
+.expDivider {
+  width: 1px;
+  background: #ffffff30;
+  align-self: stretch;
+}
+
+.expLeft {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.expLogo {
+  width: 168px;
+  height: 168px;
+  flex-shrink: 0;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: #0a0a0a;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 14px;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 0.4s ease;
+  will-change: transform;
+}
+
+.expLogo:hover {
+  transform: scale(1.06);
+  background: #131313;
+}
+
+.expLogo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.expDates {
+  font: 500 12px var(--mono);
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.expRole {
+  font: 700 clamp(20px, 2.1vw, 30px)/1.15 var(--sans);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.expCompany {
+  font: italic 500 20px/1.4 var(--serif);
+  color: #eae3d8;
+}
+
+.expPoints {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.expPoints li {
+  position: relative;
+  padding-left: 24px;
+  font: 16px/1.7 var(--sans);
+  color: #c9c4bc;
+}
+
+.expPoints li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7d7d7d;
+}
+
+@media (max-width: 850px) {
+  .expEntry {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 20px;
+    margin-bottom: 40px;
+  }
+
+  .expDivider {
+    display: none;
+  }
+
+  .expLeft {
+    gap: 18px;
+  }
+
+  .expLogo {
+    width: 110px;
+    height: 110px;
+  }
+
+  .expRole {
+    font-size: 22px;
+  }
+
+  .expCompany {
+    font-size: 17px;
+  }
+}

@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About — Umang Gajjar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #050505;
+        --paper: #f6f3ed;
+        --line: #ffffff22;
+        --muted: #a7a09d;
+        --red: #d73838;
+        --serif: "Playfair Display", Georgia, serif;
+        --sans: "DM Sans", sans-serif;
+        --mono: "DM Mono", monospace;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--ink);
+        color: var(--paper);
+        font-family: var(--sans);
+        overflow-x: hidden;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .grid {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        opacity: 0.3;
+        pointer-events: none;
+        background-image:
+          linear-gradient(var(--line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--line) 1px, transparent 1px);
+        background-size: 80px 80px;
+        mask-image: linear-gradient(#000, transparent 75%);
+      }
+      nav {
+        height: 86px;
+        padding: 0 2.1vw;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        inset: 0 0 auto;
+        background: #050505f0;
+        backdrop-filter: blur(16px);
+        z-index: 10;
+      }
+      .mark {
+        font: italic 500 42px/1 var(--serif);
+        letter-spacing: -0.15em;
+      }
+      .nav-links {
+        display: flex;
+        list-style: none;
+        padding: 4px;
+        gap: 3px;
+        border: 1px solid var(--line);
+        background: #111;
+        border-radius: 10px;
+      }
+      .nav-links a {
+        padding: 11px 18px;
+        display: block;
+        border-radius: 6px;
+        font: 500 11px var(--mono);
+        letter-spacing: 0.16em;
+        color: #aaa;
+        transition: 0.25s;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: #fff;
+        background: #842021;
+      }
+      .socials {
+        display: flex;
+        gap: 8px;
+      }
+      .socials a {
+        width: 43px;
+        height: 43px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        background: #111;
+        color: #ddd;
+        font: 600 13px var(--serif);
+        transition: 0.25s;
+      }
+      .socials a svg {
+        display: block;
+      }
+      .socials a:hover {
+        color: #fff;
+        border-color: var(--red);
+        box-shadow: 0 0 20px #d7383844;
+      }
+      .section {
+        padding: 140px 3.5vw 95px;
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 29px;
+        font: 500 11px var(--mono);
+        letter-spacing: 0.39em;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+      .eyebrow:before {
+        content: "";
+        width: 90px;
+        height: 1px;
+        background: var(--red);
+      }
+      .heading {
+        font: 600 clamp(70px, 10vw, 160px)/0.88 var(--serif);
+        letter-spacing: -0.08em;
+        margin: 65px 0 60px;
+      }
+      #about .heading {
+        font-size: clamp(40px, 5vw, 72px);
+        margin: 40px 0 30px;
+      }
+
+      /* ---------------- About / code window ---------------- */
+      #about {
+        min-height: 100vh;
+        background: linear-gradient(145deg, #070707 58%, #0e0707);
+      }
+      .about-copy {
+        max-width: 640px;
+        margin-bottom: 60px;
+        color: #aaa;
+        font: 16px/1.8 var(--serif);
+      }
+      .device-frame {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 34px 46px;
+        background: linear-gradient(180deg, #fdfdfc, #e9e8e5);
+        border-radius: 34px;
+        border: 1px solid #00000012;
+        box-shadow:
+          0 60px 110px -40px #000000e6,
+          inset 0 1px 0 #ffffffcc;
+        position: relative;
+        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .device-frame:hover {
+        transform: scale(1.02);
+      }
+      .device-frame:before,
+      .device-frame:after {
+        content: "";
+        position: absolute;
+        top: 26px;
+        bottom: 26px;
+        width: 2px;
+        background-image: radial-gradient(circle, #c9c7c2 1.4px, transparent 1.6px);
+        background-size: 2px 12px;
+        background-repeat: repeat-y;
+      }
+      .device-frame:before {
+        left: 16px;
+      }
+      .device-frame:after {
+        right: 16px;
+      }
+      .code-window {
+        max-width: 1100px;
+        margin: 0 auto;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: #0b0d12;
+        box-shadow: 0 40px 90px -30px #000000cc;
+      }
+      .code-titlebar {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 18px 22px;
+        background: #0f1116;
+        border-bottom: 1px solid var(--line);
+      }
+      .traffic {
+        display: flex;
+        gap: 9px;
+      }
+      .traffic i {
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        display: block;
+      }
+      .traffic .c1 {
+        background: #ff5f57;
+      }
+      .traffic .c2 {
+        background: #febc2e;
+      }
+      .traffic .c3 {
+        background: #28c840;
+      }
+      .code-tab {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 7px 14px;
+        background: #171a21;
+        border-radius: 7px;
+        font: 600 13px var(--mono);
+        color: #e4dcd0;
+      }
+      .code-tab b {
+        color: #f0b429;
+        font-weight: 700;
+      }
+      .code-body {
+        padding: 34px 40px 44px;
+        overflow-x: auto;
+        font: 15px/1.9 var(--mono);
+      }
+      .code-line {
+        display: flex;
+        gap: 26px;
+        white-space: pre;
+      }
+      .ln {
+        color: #4a4f5c;
+        font-style: italic;
+        min-width: 18px;
+        text-align: right;
+        user-select: none;
+      }
+      .tok-kw {
+        color: #c893ff;
+      }
+      .tok-var {
+        color: #f6f3ed;
+      }
+      .tok-key {
+        color: #ff8383;
+      }
+      .tok-str {
+        color: #9fd88b;
+      }
+      .tok-num {
+        color: #ff8383;
+      }
+      .tok-bool {
+        color: #ff8383;
+      }
+      .tok-punc {
+        color: #7d848f;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 55px 3vw;
+      }
+      .footer-mark {
+        font: italic 500 42px/1 var(--serif);
+        letter-spacing: -0.15em;
+        color: var(--paper);
+        transition: color 0.25s;
+      }
+      .footer-mark:hover {
+        color: var(--red);
+      }
+      .footer-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 16px;
+      }
+      .footer-socials {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .footer-socials a {
+        display: grid;
+        place-items: center;
+        color: #999;
+        transition:
+          color 0.25s,
+          transform 0.25s;
+      }
+      .footer-socials a:hover {
+        color: #fff;
+        transform: translateY(-2px);
+      }
+      .footer-copy {
+        font: 500 11px var(--mono);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #888;
+      }
+
+      @media (max-width: 850px) {
+        nav {
+          height: 70px;
+          padding: 0 18px;
+        }
+        .mark {
+          font-size: 34px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .socials a {
+          width: 36px;
+          height: 36px;
+        }
+        .socials a:nth-child(n + 3) {
+          display: none;
+        }
+        .section {
+          padding: 96px 20px;
+        }
+        .heading {
+          margin: 42px 0 40px;
+        }
+        .device-frame {
+          padding: 20px 14px;
+          border-radius: 22px;
+        }
+        .device-frame:before,
+        .device-frame:after {
+          display: none;
+        }
+        .code-body {
+          padding: 24px 18px 32px;
+          font-size: 12px;
+        }
+        .code-line {
+          gap: 14px;
+        }
+        footer {
+          padding: 36px 20px;
+        }
+        .footer-mark {
+          font-size: 30px;
+        }
+        .footer-socials {
+          gap: 16px;
+        }
+        .footer-copy {
+          font-size: 9px;
+        }
+        .eyebrow:before {
+          width: 45px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *:before,
+        *:after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid"></div>
+    <nav>
+      <a class="mark" href="index.html#home">UG</a>
+      <ul class="nav-links">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a class="active" href="about.html">About</a></li>
+        <li><a href="index.html#experience">Experience</a></li>
+        <li><a href="index.html#education">Education</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="socials">
+        <a href="https://linkedin.com" aria-label="LinkedIn" title="LinkedIn">in</a
+        ><a href="https://github.com" aria-label="GitHub" title="GitHub"
+          ><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path
+              d="M12 .5C5.73.5.5 5.73.5 12c0 5.09 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"
+            /></svg
+        ></a>
+        <a
+          href="mailto:hello@example.com"
+          aria-label="Email"
+          title="Email"
+          ><svg
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+          >
+            <rect x="2.5" y="4.5" width="19" height="15" rx="2" />
+            <path d="M3 6l9 7 9-7" />
+          </svg></a
+        ><a href="resume.pdf" aria-label="Resume" title="Resume"
+          ><svg
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+          >
+            <path d="M6 2.5h8l4 4V21a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1Z" />
+            <path d="M14 2.5V7h4" />
+            <path d="M8 12h8M8 15.5h8M8 9h3" />
+          </svg>
+        </a>
+      </div>
+    </nav>
+    <main>
+      <section class="section" id="about">
+        <p class="eyebrow">About</p>
+        <h2 class="heading">About Me</h2>
+        <p class="about-copy">
+          A quick look at who I am, in the format I spend most of my day
+          reading and writing.
+        </p>
+
+        <div class="device-frame">
+          <div class="code-window">
+            <div class="code-titlebar">
+              <div class="traffic">
+                <i class="c1"></i><i class="c2"></i><i class="c3"></i>
+              </div>
+              <span class="code-tab"><b>JS</b> AboutMe.js</span>
+            </div>
+            <div class="code-body">
+              <div class="code-line"><span class="ln">1</span><span><span class="tok-kw">const</span> <span class="tok-var">developer</span> <span class="tok-punc">=</span> <span class="tok-punc">{</span></span></div>
+              <div class="code-line"><span class="ln">2</span><span></span></div>
+              <div class="code-line"><span class="ln">3</span><span>&nbsp;&nbsp;<span class="tok-key">name</span><span class="tok-punc">:</span> <span class="tok-str">"Umang Gajjar"</span><span class="tok-punc">,</span></span></div>
+              <div class="code-line"><span class="ln">4</span><span></span></div>
+              <div class="code-line"><span class="ln">5</span><span>&nbsp;&nbsp;<span class="tok-key">role</span><span class="tok-punc">:</span> <span class="tok-str">"Full Stack Developer"</span><span class="tok-punc">,</span></span></div>
+              <div class="code-line"><span class="ln">6</span><span></span></div>
+              <div class="code-line"><span class="ln">7</span><span>&nbsp;&nbsp;<span class="tok-key">experience</span><span class="tok-punc">:</span> <span class="tok-str">"2+ Years"</span><span class="tok-punc">,</span></span></div>
+              <div class="code-line"><span class="ln">8</span><span></span></div>
+              <div class="code-line"><span class="ln">9</span><span>&nbsp;&nbsp;<span class="tok-key">techStack</span><span class="tok-punc">:</span> [<span class="tok-str">"React"</span>, <span class="tok-str">"Node.js"</span>, <span class="tok-str">"Express"</span>, <span class="tok-str">"TypeScript"</span>, <span class="tok-str">"MongoDB"</span>, <span class="tok-str">"Docker"</span>]<span class="tok-punc">,</span></span></div>
+              <div class="code-line"><span class="ln">10</span><span></span></div>
+              <div class="code-line"><span class="ln">11</span><span>&nbsp;&nbsp;<span class="tok-key">learning</span><span class="tok-punc">:</span> [<span class="tok-str">"System Design"</span>, <span class="tok-str">"Kubernetes"</span>, <span class="tok-str">"AWS"</span>]<span class="tok-punc">,</span></span></div>
+              <div class="code-line"><span class="ln">12</span><span></span></div>
+              <div class="code-line"><span class="ln">13</span><span>&nbsp;&nbsp;<span class="tok-key">interests</span><span class="tok-punc">:</span> [<span class="tok-str">"Open Source"</span>, <span class="tok-str">"Competitive Programming"</span>, <span class="tok-str">"System Design"</span>]<span class="tok-punc">,</span></span></div>
+              <div class="code-line"><span class="ln">14</span><span></span></div>
+              <div class="code-line"><span class="ln">15</span><span>&nbsp;&nbsp;<span class="tok-key">contact</span><span class="tok-punc">:</span> <span class="tok-punc">{</span></span></div>
+              <div class="code-line"><span class="ln">16</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tok-key">email</span><span class="tok-punc">:</span> <span class="tok-str">"hello@example.com"</span><span class="tok-punc">,</span></span></div>
+              <div class="code-line"><span class="ln">17</span><span>&nbsp;&nbsp;<span class="tok-punc">}</span><span class="tok-punc">,</span></span></div>
+              <div class="code-line"><span class="ln">18</span><span></span></div>
+              <div class="code-line"><span class="ln">19</span><span>&nbsp;&nbsp;<span class="tok-key">availableForWork</span><span class="tok-punc">:</span> <span class="tok-bool">true</span></span></div>
+              <div class="code-line"><span class="ln">20</span><span><span class="tok-punc">}</span><span class="tok-punc">;</span></span></div>
+              <div class="code-line"><span class="ln">21</span><span></span></div>
+              <div class="code-line"><span class="ln">22</span><span><span class="tok-kw">export default</span> <span class="tok-var">developer</span><span class="tok-punc">;</span></span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <a class="footer-mark" href="index.html#home">UG</a>
+      <div class="footer-right">
+        <div class="footer-socials">
+          <a href="https://linkedin.com" aria-label="LinkedIn" title="LinkedIn"
+            ><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
+              <path
+                d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5.001zM3 9h4v12H3zM9 9h3.6v1.71h.05c.5-.95 1.73-1.95 3.56-1.95C20.1 8.76 21 11.13 21 14.28V21h-4v-5.95c0-1.42-.03-3.25-1.98-3.25-1.98 0-2.29 1.55-2.29 3.15V21H9z"
+              /></svg
+          ></a>
+          <a href="https://github.com" aria-label="GitHub" title="GitHub"
+            ><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
+              <path
+                d="M12 .5C5.73.5.5 5.73.5 12c0 5.09 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"
+              /></svg
+          ></a>
+          <a href="https://leetcode.com" aria-label="LeetCode" title="LeetCode"
+            ><svg
+              viewBox="0 0 24 24"
+              width="19"
+              height="19"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+            >
+              <path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 5l-3 14" /></svg
+          ></a>
+          <a href="https://twitter.com" aria-label="X" title="X"
+            ><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor">
+              <path
+                d="M18.146 2H21l-7.19 8.22L22 22h-6.844l-5.36-7.02L3.6 22H.744l7.73-8.84L2 2h6.99l4.84 6.42L18.146 2Zm-1.2 18h1.9L7.13 4H5.1l11.846 16Z"
+              /></svg
+          ></a>
+        </div>
+        <p class="footer-copy">© 2026 UMANG GAJJAR</p>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        const navEl = document.querySelector("nav");
+        const threshold = 40;
+        function updateNav() {
+          if (window.scrollY > threshold) navEl.classList.add("scrolled");
+          else navEl.classList.remove("scrolled");
+        }
+        window.addEventListener("scroll", updateNav, { passive: true });
+        updateNav();
+      })();
+    </script>
+  </body>
+</html>
