@@ -234,7 +234,7 @@
   min-height: 520px;
   background:
     linear-gradient(90deg, #18130e88, #0001),
-    url("/avatar.png") center/cover;
+    url("/contact.png") center/cover;
   filter: grayscale(1) contrast(1.1);
   transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }

@@ -86,7 +86,7 @@ export default function ContactPage() {
 
       <div className="quote-section">
         <p className="quote-text">&ldquo;Code is poetry written for machines to read.&rdquo;</p>
-        <p className="quote-attribution">— Anonymous</p>
+        <p className="quote-attribution">— Umang Khemka</p>
       </div>
     </main>
   );

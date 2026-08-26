@@ -102,7 +102,9 @@ const lines = [
         <span className={styles.tokStr}>&quot;Express.js&quot;</span>,{" "}
         <span className={styles.tokStr}>&quot;Next.js&quot;</span>,{" "}
         <span className={styles.tokStr}>&quot;TypeScript&quot;</span>,{" "}
-        <span className={styles.tokStr}>&quot;MongoDB&quot;</span>]
+        <span className={styles.tokStr}>&quot;MongoDB&quot;</span>,{" "}
+        <span className={styles.tokStr}>&quot;Prisma ORM&quot;</span>,{" "}
+        <span className={styles.tokStr}>&quot;JavaScript&quot;</span>]
         <span className={styles.tokPunc}>,</span>
       </>
     ),
