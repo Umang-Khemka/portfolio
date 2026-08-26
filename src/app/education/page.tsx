@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import styles from "./education.module.css";
 
-export const metadata: Metadata = {
-  title: "Education — Umang Khemka",
-};
+
 
 export default function EducationPage() {
   return (

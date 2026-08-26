@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import styles from "./about.module.css";
 
-export const metadata: Metadata = {
-  title: "About — Umang Khemka",
-};
+
 
 const lines = [
   {
@@ -150,6 +148,19 @@ const lines = [
     ln: 19,
     code: (
       <>
+        &nbsp;&nbsp;<span className={styles.tokKey}>Hackathons</span>
+        <span className={styles.tokPunc}>:</span>{" "}
+        [
+        <span className={styles.tokStr}>&quot;Hacksogon 2026 Finalist (ABV - IIITM Gwalior)&quot;</span>]
+      </>
+    ),
+  },
+  { ln: 20, code: null },
+
+  {
+    ln: 21,
+    code: (
+      <>
         &nbsp;&nbsp;<span className={styles.tokKey}>interests</span>
         <span className={styles.tokPunc}>:</span>{" "}
         [
@@ -164,7 +175,7 @@ const lines = [
   },
 
   {
-    ln: 20,
+    ln: 22,
     code: (
       <>
         <span className={styles.tokPunc}>{"}"}</span>
@@ -172,10 +183,10 @@ const lines = [
       </>
     ),
   },
-  { ln: 21, code: null },
+  { ln: 23, code: null },
 
   {
-    ln: 22,
+    ln: 24,
     code: (
       <>
         <span className={styles.tokKw}>export default</span>{" "}

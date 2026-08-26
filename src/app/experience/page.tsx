@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import styles from "./experience.module.css";
 
-export const metadata: Metadata = {
-  title: "Experience — Umang Khemka",
-};
+
 
 const experiences = [
   {

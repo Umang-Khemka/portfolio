@@ -4,9 +4,12 @@ import Footer from "@/components/Footer";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "Umang Gajjar — Full Stack Developer",
+  title: "Umang Khemka",
   description:
     "Building scalable backend platforms, AI-powered products, and delightful digital experiences.",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({
