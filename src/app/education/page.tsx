@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "./education.module.css";
 
 export const metadata: Metadata = {
-  title: "Education — Umang Gajjar",
+  title: "Education — Umang Khemka",
 };
 
 export default function EducationPage() {
@@ -26,20 +26,31 @@ export default function EducationPage() {
               height={184}
             />
           </div>
+
           <div className={styles.eduDivider} />
+
           <div className={styles.eduInfo}>
             <p className={styles.eduDates}>2023 — 2027</p>
-            <h2 className={styles.eduDegree}>Bachelor of Technology</h2>
-            <p className={styles.eduField}>Computational Engineering</p>
+
+            <h2 className={styles.eduDegree}>
+              Bachelor of Technology
+            </h2>
+
+            <p className={styles.eduField}>
+              Computer Engineering
+            </p>
+
             <p className={styles.eduSchool}>
               Sarvajanik College of Engineering and Technology
             </p>
+
             <p className={styles.eduDesc}>
-              Building a strong foundation in computer science, software
-              engineering, algorithms, distributed systems, databases and
-              modern full-stack development while actively applying concepts
-              through production-grade projects and competitive programming.
-              CGPA: 8.2
+              Pursuing a B.Tech in Computer Engineering with a focus on
+              software development, data structures &amp; algorithms,
+              backend engineering, databases, distributed systems and
+              modern web technologies. Building full-stack applications
+              while strengthening problem-solving skills through competitive
+              programming and practical software projects. CGPA: 8
             </p>
           </div>
         </article>
@@ -48,23 +59,25 @@ export default function EducationPage() {
           <div className={styles.card}>
             <h3>Technical Focus</h3>
             <ul>
+              <li>Data Structures &amp; Algorithms</li>
               <li>Full Stack Development</li>
               <li>Backend Engineering</li>
-              <li>AI Systems &amp; LLM Evaluation</li>
-              <li>Distributed Systems</li>
+              <li>Distributed Systems &amp; Databases</li>
               <li>Cloud &amp; DevOps</li>
-              <li>Competitive Programming</li>
+              <li>AI &amp; LLM Systems</li>
             </ul>
           </div>
+
           <div className={styles.card}>
-            <h3>Achievements</h3>
+            <h3>Highlights</h3>
             <ul>
-              <li>1000+ Problems Solved Across Platforms</li>
-              <li>Global Rank 294 — CodeChef Starters 225</li>
-              <li>1760+ LeetCode Rating</li>
-              <li>2★ CodeChef Rating</li>
-              <li>Built 4+ Production Grade Projects</li>
-              <li>Strong Foundation in DSA &amp; System Design</li>
+              <li>500+ Problems Solved Across Platforms</li>
+              <li>1600+ Rating on LeetCode</li>
+              <li>Hands-on Experience with MERN &amp; Next.js</li>
+              <li>Built Full-Stack Production Projects</li>
+              <li>Software Developer Internship Experience</li>
+              <li>Experience with Docker, Redis &amp; Cloud Deployment</li>
+              <li>3 Open-Source Pull Requests Merged in AOSSIE-Org PictoPy Project</li>
             </ul>
           </div>
         </div>

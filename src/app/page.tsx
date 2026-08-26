@@ -20,10 +20,11 @@ const HERO_TEXT = "UMANGKHEMKA";
 export default function HomePage() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [roleFade, setRoleFade] = useState(true);
-  const [formDone, setFormDone] = useState(false);
   const contributionsRef = useRef<HTMLDivElement>(null);
   const ghCardRef = useRef<HTMLDivElement>(null);
   const revealRef = useRef<HTMLElement | null>(null);
+  const [formStatus, setFormStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
   /* Role rotator */
   useEffect(() => {
@@ -37,28 +38,28 @@ export default function HomePage() {
     return () => clearInterval(id);
   }, []);
   /* Scroll reveal */
-useEffect(() => {
-  const elements = document.querySelectorAll(".scroll-reveal");
+  useEffect(() => {
+    const elements = document.querySelectorAll(".scroll-reveal");
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.12,
-      rootMargin: "0px 0px -70px 0px",
-    }
-  );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -70px 0px",
+      }
+    );
 
-  elements.forEach((element) => observer.observe(element));
+    elements.forEach((element) => observer.observe(element));
 
-  return () => observer.disconnect();
-}, []);
+    return () => observer.disconnect();
+  }, []);
 
   /* Inject hero keyframes once */
   useEffect(() => {
@@ -162,6 +163,30 @@ useEffect(() => {
     };
   }, []);
 
+  const handleFormChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleFormSubmit = async () => {
+    setFormStatus("loading");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Failed");
+
+      setFormStatus("done");
+      setFormData({ name: "", email: "", message: "" });
+    } catch {
+      setFormStatus("error");
+    }
+  };
+
   return (
     <main>
       {/* ── Hero ─────────────────────────────────────────── */}
@@ -196,7 +221,6 @@ useEffect(() => {
           </div>
 
           <div className={`${styles.ghWrap} ${styles.heroContentIntro}`}>
-            <p className={styles.ghUser}>umangkhemka ↗</p>
             <div ref={ghCardRef} className={styles.ghCard}>
               <div ref={contributionsRef} className={styles.contributions} />
               <div className={styles.months}>
@@ -233,7 +257,8 @@ useEffect(() => {
         </div>
 
         <article className="project">
-          <div className="project-visual scroll-reveal reveal-left-slow">
+          {/* Image → */}
+          <div className="project-visual scroll-reveal reveal-left slow">
             <div className="project-image-box">
               <Image
                 className="project-img"
@@ -244,55 +269,102 @@ useEffect(() => {
               />
             </div>
           </div>
+
+          {/* ← Text */}
           <div className="project-info scroll-reveal reveal-right">
-            <p className="project-kicker"><b>01</b> Collaboration</p>
-            <h3>CollabBoard</h3>
-            <p>Real-time Collaborative Workspace</p>
-            <p className="project-desc">
-              A real-time workspace for teams to plan, discuss, and ship
-              together. Built around fluid collaboration and reliable updates.
+            <p className="project-kicker">
+              <b>01</b> Healthcare Platform
             </p>
+
+            <h3>HopCare</h3>
+
+            <p>Full-Stack Healthcare Management Platform</p>
+
+            <p className="project-desc">
+              A full-stack healthcare platform enabling seamless appointment
+              booking, prescription handling, and doctor–patient interaction
+              through secure, role-based dashboards.
+            </p>
+
             <blockquote className="project-note">
-              Features live boards, drag-and-drop cards, and instant sync
-              across every teammate's screen.
+              JWT-secured role-based access, conflict-free appointment
+              scheduling, and digital prescriptions — all built on a
+              single-source-of-truth backend.
             </blockquote>
+
             <div className="tags">
-              <span>React</span><span>Node.js</span><span>Express</span>
-              <span>Socket.IO</span><span>MongoDB</span>
+              <span>React.js</span>
+              <span>Node.js</span>
+              <span>Express.js</span>
+              <span>MongoDB</span>
+              <span>JWT</span>
+              <span>Zustand</span>
+              <span>Tailwind CSS</span>
             </div>
+
             <div className="project-links">
-              <a href="#">Source code ↗</a><a href="#">View project ↗</a>
+              <a href="https://github.com/Umang-Khemka/Hopcare-Reactjs" target="_blank" rel="noopener noreferrer">
+                Source code ↗
+              </a>
+              <a href="https://hopcare-reactjs.onrender.com" target="_blank" rel="noopener noreferrer">
+                View project ↗
+              </a>
             </div>
           </div>
         </article>
 
+        {/* ── Project 02 ─────────────────────────────────── */}
+        {/* ── Project 02 ─────────────────────────────────── */}
         <article className="project">
+          {/* Text → */}
           <div className="project-info scroll-reveal reveal-left">
-            <p className="project-kicker"><b>02</b> AI Platform</p>
-            <h3>ArmorIQ</h3>
-            <p>Secure Enterprise AI Agent Platform</p>
-            <p className="project-desc">
-              A secure AI agent platform that helps teams interact with external
-              tools through a carefully governed, auditable control layer.
+            <p className="project-kicker">
+              <b>02</b> Video Conferencing
             </p>
+
+            <h3>Meetly</h3>
+
+            <p>Real-Time Video Conferencing Platform</p>
+
+            <p className="project-desc">
+              A full-stack video conferencing platform that lets users start, join,
+              and manage meetings seamlessly — with guest access, meeting history,
+              and real-time video, audio, chat, and screen sharing.
+            </p>
+
             <blockquote className="project-note">
-              Every tool call is authenticated, logged, and reviewable —
-              nothing runs outside the governed path.
+              WebRTC powers live video and screen sharing, while Socket.IO keeps
+              chat and participant state in sync across every client.
             </blockquote>
+
             <div className="tags">
-              <span>Next.js</span><span>TypeScript</span>
-              <span>PostgreSQL</span><span>Docker</span>
+              <span>React.js</span>
+              <span>Node.js</span>
+              <span>Express.js</span>
+              <span>Socket.IO</span>
+              <span>WebRTC</span>
+              <span>JWT</span>
+              <span>Zustand</span>
+              <span>Bootstrap</span>
             </div>
+
             <div className="project-links">
-              <a href="#">Source code ↗</a><a href="#">View project ↗</a>
+              <a href="https://github.com/Umang-Khemka/Meetly" target="_blank" rel="noopener noreferrer">
+                Source code ↗
+              </a>
+              <a href="https://meetly-3.onrender.com" target="_blank" rel="noopener noreferrer">
+                View project ↗
+              </a>
             </div>
           </div>
-          <div className="project-visual scroll-reveal reveal-right-slow">
+
+          {/* ← Image */}
+          <div className="project-visual scroll-reveal reveal-right slow">
             <div className="project-image-box">
               <Image
                 className="project-img"
                 src="/meetly.png"
-                alt="ArmorIQ preview"
+                alt="Meetly preview"
                 width={600}
                 height={390}
               />
@@ -300,36 +372,61 @@ useEffect(() => {
           </div>
         </article>
 
+        {/* ── Project 03 ─────────────────────────────────── */}
         <article className="project">
-          <div className="project-visual scroll-reveal reveal-left-slow">
+          {/* Image → */}
+          <div className="project-visual scroll-reveal reveal-left slow">
             <div className="project-image-box">
               <Image
                 className="project-img"
                 src="/stayora.png"
-                alt="SignalDock preview"
+                alt="Stayora preview"
                 width={600}
                 height={390}
               />
             </div>
           </div>
+
+          {/* ← Text */}
           <div className="project-info scroll-reveal reveal-right">
-            <p className="project-kicker"><b>03</b> Webhook Platform</p>
-            <h3>SignalDock</h3>
-            <p>Production-Ready Webhook Infrastructure</p>
-            <p className="project-desc">
-              A resilient webhook delivery platform for processing asynchronous
-              events at scale, with retries, observability and dead-letter
-              queues built in.
+            <p className="project-kicker">
+              <b>03</b> Vacation Rentals
             </p>
+
+            <h3>Stayora</h3>
+
+            <p>Vacation Rental & Booking Platform</p>
+
+            <p className="project-desc">
+              A full-stack vacation rental platform where hosts list properties
+              and users browse, book, and manage accommodations by location,
+              category, and price through a responsive interface.
+            </p>
+
             <blockquote className="project-note">
-              Failed deliveries retry with backoff and land in a dead-letter
-              queue instead of vanishing silently.
+              Wishlist, reviews, and Cloudinary-backed image management make
+              listings easy to discover, save, and book.
             </blockquote>
+
             <div className="tags">
-              <span>Node.js</span><span>TypeScript</span><span>BullMQ</span>
-              <span>Redis</span><span>Prisma</span>
+              <span>React.js</span>
+              <span>Node.js</span>
+              <span>Express.js</span>
+              <span>MongoDB</span>
+              <span>JWT</span>
+              <span>Zustand</span>
+              <span>Tailwind CSS</span>
+              <span>Cloudinary</span>
             </div>
-            <div className="project-links"><a href="#">Source code ↗</a></div>
+
+            <div className="project-links">
+              <a href="https://github.com/Umang-Khemka/stayora" target="_blank" rel="noopener noreferrer">
+                Source code ↗
+              </a>
+              <a href="https://stayora-luge.onrender.com" target="_blank" rel="noopener noreferrer">
+                View project ↗
+              </a>
+            </div>
           </div>
         </article>
       </section>
@@ -347,11 +444,40 @@ useEffect(() => {
               Whether it&apos;s an internship, collaboration, or just saying hello,
               I&apos;d love to hear from you.
             </p>
-            <input aria-label="Your name" placeholder="Your Name" />
-            <input aria-label="Your email address" type="email" placeholder="Email Address" />
-            <textarea aria-label="Your message" placeholder="Tell me about your project..." />
-            <button type="button" onClick={() => setFormDone(true)}>
-              {formDone ? "Message ready — thank you" : "Send Message →"}
+            <input
+              aria-label="Your name"
+              name="name"
+              placeholder="Your Name"
+              value={formData.name}
+              onChange={handleFormChange}
+            />
+            <input
+              aria-label="Your email address"
+              name="email"
+              type="email"
+              placeholder="Email Address"
+              value={formData.email}
+              onChange={handleFormChange}
+            />
+            <textarea
+              aria-label="Your message"
+              name="message"
+              placeholder="Tell me about your project..."
+              value={formData.message}
+              onChange={handleFormChange}
+            />
+            <button
+              type="button"
+              onClick={handleFormSubmit}
+              disabled={formStatus === "loading"}
+            >
+              {formStatus === "done"
+                ? "Message sent — thank you"
+                : formStatus === "loading"
+                  ? "Sending…"
+                  : formStatus === "error"
+                    ? "Failed — try again"
+                    : "Send Message →"}
             </button>
           </div>
         </div>

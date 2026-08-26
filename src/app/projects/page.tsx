@@ -47,7 +47,7 @@ export default function ProjectsPage() {
 
           <a
             className="intro-link"
-            href="https://github.com"
+            href="https://github.com/Umang-Khemka"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -63,7 +63,7 @@ export default function ProjectsPage() {
               <Image
                 className="project-img"
                 src="/hopcare.png"
-                alt="CollabBoard preview"
+                alt="HopCare preview"
                 width={600}
                 height={390}
               />
@@ -73,71 +73,88 @@ export default function ProjectsPage() {
           {/* ← Text */}
           <div className="project-info scroll-reveal reveal-right">
             <p className="project-kicker">
-              <b>01</b> Collaboration
+              <b>01</b> Healthcare Platform
             </p>
 
-            <h3>CollabBoard</h3>
+            <h3>HopCare</h3>
 
-            <p>Real-time Collaborative Workspace</p>
+            <p>Full-Stack Healthcare Management Platform</p>
 
             <p className="project-desc">
-              A real-time workspace for teams to plan, discuss, and ship
-              together. Built around fluid collaboration and reliable updates.
+              A full-stack healthcare platform enabling seamless appointment
+              booking, prescription handling, and doctor–patient interaction
+              through secure, role-based dashboards.
             </p>
 
             <blockquote className="project-note">
-              Features live boards, drag-and-drop cards, and instant sync
-              across every teammate&apos;s screen.
+              JWT-secured role-based access, conflict-free appointment
+              scheduling, and digital prescriptions — all built on a
+              single-source-of-truth backend.
             </blockquote>
 
             <div className="tags">
-              <span>React</span>
+              <span>React.js</span>
               <span>Node.js</span>
-              <span>Express</span>
-              <span>Socket.IO</span>
+              <span>Express.js</span>
               <span>MongoDB</span>
+              <span>JWT</span>
+              <span>Zustand</span>
+              <span>Tailwind CSS</span>
             </div>
 
             <div className="project-links">
-              <a href="#">Source code ↗</a>
-              <a href="#">View project ↗</a>
+              <a href="https://github.com/Umang-Khemka/Hopcare-Reactjs" target="_blank" rel="noopener noreferrer">
+                Source code ↗
+              </a>
+              <a href="https://hopcare-reactjs.onrender.com" target="_blank" rel="noopener noreferrer">
+                View project ↗
+              </a>
             </div>
           </div>
         </article>
 
         {/* ── Project 02 ─────────────────────────────────── */}
+        {/* ── Project 02 ─────────────────────────────────── */}
         <article className="project">
           {/* Text → */}
           <div className="project-info scroll-reveal reveal-left">
             <p className="project-kicker">
-              <b>02</b> AI Platform
+              <b>02</b> Video Conferencing
             </p>
 
-            <h3>ArmorIQ</h3>
+            <h3>Meetly</h3>
 
-            <p>Secure Enterprise AI Agent Platform</p>
+            <p>Real-Time Video Conferencing Platform</p>
 
             <p className="project-desc">
-              A secure AI agent platform that helps teams interact with
-              external tools through a carefully governed, auditable control
-              layer.
+              A full-stack video conferencing platform that lets users start, join,
+              and manage meetings seamlessly — with guest access, meeting history,
+              and real-time video, audio, chat, and screen sharing.
             </p>
 
             <blockquote className="project-note">
-              Every tool call is authenticated, logged, and reviewable —
-              nothing runs outside the governed path.
+              WebRTC powers live video and screen sharing, while Socket.IO keeps
+              chat and participant state in sync across every client.
             </blockquote>
 
             <div className="tags">
-              <span>Next.js</span>
-              <span>TypeScript</span>
-              <span>PostgreSQL</span>
-              <span>Docker</span>
+              <span>React.js</span>
+              <span>Node.js</span>
+              <span>Express.js</span>
+              <span>Socket.IO</span>
+              <span>WebRTC</span>
+              <span>JWT</span>
+              <span>Zustand</span>
+              <span>Bootstrap</span>
             </div>
 
             <div className="project-links">
-              <a href="#">Source code ↗</a>
-              <a href="#">View project ↗</a>
+              <a href="https://github.com/Umang-Khemka/Meetly" target="_blank" rel="noopener noreferrer">
+                Source code ↗
+              </a>
+              <a href="https://meetly-3.onrender.com" target="_blank" rel="noopener noreferrer">
+                View project ↗
+              </a>
             </div>
           </div>
 
@@ -147,7 +164,7 @@ export default function ProjectsPage() {
               <Image
                 className="project-img"
                 src="/meetly.png"
-                alt="ArmorIQ preview"
+                alt="Meetly preview"
                 width={600}
                 height={390}
               />
@@ -163,7 +180,7 @@ export default function ProjectsPage() {
               <Image
                 className="project-img"
                 src="/stayora.png"
-                alt="SignalDock preview"
+                alt="Stayora preview"
                 width={600}
                 height={390}
               />
@@ -173,34 +190,42 @@ export default function ProjectsPage() {
           {/* ← Text */}
           <div className="project-info scroll-reveal reveal-right">
             <p className="project-kicker">
-              <b>03</b> Webhook Platform
+              <b>03</b> Vacation Rentals
             </p>
 
-            <h3>SignalDock</h3>
+            <h3>Stayora</h3>
 
-            <p>Production-Ready Webhook Infrastructure</p>
+            <p>Vacation Rental & Booking Platform</p>
 
             <p className="project-desc">
-              A resilient webhook delivery platform for processing
-              asynchronous events at scale, with retries, observability and
-              dead-letter queues built in.
+              A full-stack vacation rental platform where hosts list properties
+              and users browse, book, and manage accommodations by location,
+              category, and price through a responsive interface.
             </p>
 
             <blockquote className="project-note">
-              Failed deliveries retry with backoff and land in a dead-letter
-              queue instead of vanishing silently.
+              Wishlist, reviews, and Cloudinary-backed image management make
+              listings easy to discover, save, and book.
             </blockquote>
 
             <div className="tags">
+              <span>React.js</span>
               <span>Node.js</span>
-              <span>TypeScript</span>
-              <span>BullMQ</span>
-              <span>Redis</span>
-              <span>Prisma</span>
+              <span>Express.js</span>
+              <span>MongoDB</span>
+              <span>JWT</span>
+              <span>Zustand</span>
+              <span>Tailwind CSS</span>
+              <span>Cloudinary</span>
             </div>
 
             <div className="project-links">
-              <a href="#">Source code ↗</a>
+              <a href="https://github.com/Umang-Khemka/stayora" target="_blank" rel="noopener noreferrer">
+                Source code ↗
+              </a>
+              <a href="https://stayora-luge.onrender.com" target="_blank" rel="noopener noreferrer">
+                View project ↗
+              </a>
             </div>
           </div>
         </article>
