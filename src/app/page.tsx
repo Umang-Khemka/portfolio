@@ -17,6 +17,62 @@ const ROWS = 6;
 const SCALE = 10;
 const HERO_TEXT = "UMANGKHEMKA";
 
+type ContribDay = { date: string; contributionCount: number };
+
+const getLast336Days = (githubDays: ContribDay[]) => {
+  const lookup = new Map(
+    githubDays.map((day) => [day.date, day.contributionCount])
+  );
+
+  const result: ContribDay[] = [];
+  const today = new Date();
+
+  // Build exactly 56 × 6 = 336 days, ending today.
+  // Using local date parts avoids timezone shifting around midnight.
+  for (let i = 335; i >= 0; i--) {
+    const date = new Date(today);
+    date.setHours(12, 0, 0, 0);
+    date.setDate(today.getDate() - i);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const dateString = `${year}-${month}-${day}`;
+
+    result.push({
+      date: dateString,
+      contributionCount: lookup.get(dateString) ?? 0,
+    });
+  }
+
+  return result;
+};
+
+const getContributionMonths = (days: ContribDay[]) => {
+  if (!days.length) return [];
+
+  const months: { label: string; index: number }[] = [];
+  let previousMonth = "";
+
+  days.forEach((day, index) => {
+    const date = new Date(`${day.date}T12:00:00`);
+    const key = `${date.getFullYear()}-${date.getMonth()}`;
+
+    if (key !== previousMonth) {
+      months.push({
+        label: date.toLocaleString("en-US", {
+          month: "short",
+        }),
+        index,
+      });
+
+      previousMonth = key;
+    }
+  });
+
+  return months;
+};
+
 export default function HomePage() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [roleFade, setRoleFade] = useState(true);
@@ -25,6 +81,13 @@ export default function HomePage() {
   const revealRef = useRef<HTMLElement | null>(null);
   const [formStatus, setFormStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+
+  const [contribDays, setContribDays] = useState<ContribDay[] | null>(null);
+  const [contribFailed, setContribFailed] = useState(false);
+
+  // Always display exactly 56 × 6 = 336 calendar days, ending today.
+  const displayDays = contribDays ? getLast336Days(contribDays) : [];
+  const contributionMonths = getContributionMonths(displayDays);
 
   /* Role rotator */
   useEffect(() => {
@@ -37,6 +100,7 @@ export default function HomePage() {
     }, 2600);
     return () => clearInterval(id);
   }, []);
+
   /* Scroll reveal */
   useEffect(() => {
     const elements = document.querySelectorAll(".scroll-reveal");
@@ -87,10 +151,36 @@ export default function HomePage() {
     document.head.appendChild(style);
   }, []);
 
-  /* GitHub contribution grid */
+  /* Fetch real GitHub contributions — falls back silently on failure */
+  useEffect(() => {
+    fetch("/api/github-contributions")
+      .then((res) => {
+        if (!res.ok) throw new Error("Bad response");
+        return res.json();
+      })
+      .then((data) => {
+        if (data.days && Array.isArray(data.days) && data.days.length > 0) {
+          setContribDays(data.days);
+        } else {
+          setContribFailed(true);
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to load GitHub contributions, using fallback grid:", err);
+        setContribFailed(true);
+      });
+  }, []);
+
+  /* GitHub contribution grid — real data if available, random fallback otherwise */
   useEffect(() => {
     const el = contributionsRef.current;
     if (!el) return;
+
+    // Still waiting on the fetch to resolve one way or the other — don't render yet.
+    const stillWaiting = !contribDays && !contribFailed;
+    if (stillWaiting) return;
+
+    el.innerHTML = ""; // clear in case this re-runs
 
     const buf = document.createElement("canvas");
     buf.width = COLS * SCALE;
@@ -112,6 +202,29 @@ export default function HomePage() {
 
     const pixels = bctx.getImageData(0, 0, buf.width, buf.height).data;
 
+    // Prepare real-data lookup if we have it
+    const cellCount = COLS * ROWS;
+    const recentDays = contribDays ? getLast336Days(contribDays) : null;
+    const maxCount = recentDays
+      ? Math.max(...recentDays.map((d) => d.contributionCount), 1)
+      : 1;
+
+    const colors = [
+      "#1a0a0b", // 0 contributions
+      "#3f1517", // low
+      "#7a292b", // medium
+      "#e14d4b", // high
+    ];
+
+    const getRealLevel = (count: number) => {
+      if (count === 0) return 0;
+      if (count <= 2) return 1;
+      if (count <= 5) return 2;
+      return 3;
+    };
+
+    let dayIndex = 0;
+
     for (let row = 0; row < ROWS; row++) {
       for (let col = 0; col < COLS; col++) {
         let total = 0;
@@ -128,18 +241,39 @@ export default function HomePage() {
         c.style.display = "block";
         c.style.flexShrink = "0";
 
-        if (lit) {
-          const isPeak = Math.random() < 0.25;
-          c.style.background = isPeak ? "#e14d4b" : "#a82c2e";
-          if (isPeak) {
+        const day = recentDays?.[dayIndex];
+        const level = day ? getRealLevel(day.contributionCount) : 0;
+
+        if (day) {
+          c.title = `${day.date}: ${day.contributionCount} contributions`;
+        }
+
+        if (recentDays) {
+          // Keep the existing UMANGKHEMKA pixel shape, but let real
+          // contribution activity control the intensity of every day.
+          if (lit) {
+            c.style.background = level >= 3 ? "#ff625f" : "#a82c2e";
+          } else {
+            c.style.background = colors[level];
+          }
+
+          // Highest-contribution days get the visible glow.
+          if (level === 3) {
+            c.style.background = "#ff625f";
+            c.style.boxShadow =
+              "0 0 6px 2px rgba(255, 80, 80, 0.9), 0 0 14px 4px rgba(255, 60, 60, 0.45)";
+            c.style.transform = "scale(1.08)";
+            c.style.position = "relative";
+            c.style.zIndex = "2";
             c.classList.add("gh-cell-peak");
-            c.style.animationDelay = `${(Math.random() * 2.4).toFixed(2)}s`;
           }
         } else {
-          const level = CELL_LEVELS[Math.floor(Math.random() * CELL_LEVELS.length)];
-          const colors = ["#1a0a0b", "#3f1517", "#5e2224"];
-          c.style.background = colors[level];
+          // Fallback: original random path
+          const fallbackLevel =
+            CELL_LEVELS[Math.floor(Math.random() * CELL_LEVELS.length)];
+          c.style.background = colors[fallbackLevel];
         }
+        dayIndex++;
         el.appendChild(c);
       }
     }
@@ -161,7 +295,7 @@ export default function HomePage() {
       card.removeEventListener("pointermove", handleMove);
       card.removeEventListener("pointerleave", handleLeave);
     };
-  }, []);
+  }, [contribDays, contribFailed]);
 
   const handleFormChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -224,18 +358,19 @@ export default function HomePage() {
             <div ref={ghCardRef} className={styles.ghCard}>
               <div ref={contributionsRef} className={styles.contributions} />
               <div className={styles.months}>
-                <span>Aug</span><span>Sep</span><span>Oct</span>
-                <span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span>
+                {contributionMonths.map((month, index) => (
+                  <span key={`${month.label}-${month.index}`}>{month.label}</span>
+                ))}
               </div>
             </div>
 
             {/* ── Stat cards ── */}
             <div className={styles.metrics}>
               {[
-                { value: "1000+", label: "Problems solved" },
-                { value: "280", label: "Day streak" },
-                { value: "1776", label: "Contest rating" },
-                { value: "2★", label: "CodeChef rating" },
+                { value: "500+", label: "Problems solved" },
+                { value: "1600+", label: "Contest rating" },
+                { value: "41", label: "POTD streak on GFG" },
+                { value: "3", label: "Open Source Contributions" },
               ].map(({ value, label }) => (
                 <div key={label} className={styles.metric}>
                   <strong>{value}</strong>
@@ -313,7 +448,6 @@ export default function HomePage() {
           </div>
         </article>
 
-        {/* ── Project 02 ─────────────────────────────────── */}
         {/* ── Project 02 ─────────────────────────────────── */}
         <article className="project">
           {/* Text → */}
@@ -486,7 +620,7 @@ export default function HomePage() {
       {/* ── Quote ────────────────────────────────────────── */}
       <div className="quote-section scroll-reveal reveal-up">
         <p className="quote-text">&ldquo;Code is poetry written for machines to read.&rdquo;</p>
-        <p className="quote-attribution">— Anonymous</p>
+        <p className="quote-attribution">— Umang Khemka</p>
       </div>
     </main>
   );
