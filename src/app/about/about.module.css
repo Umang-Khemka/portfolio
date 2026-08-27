@@ -127,7 +127,21 @@
 .tokBool { color: #ff8383; }
 .tokPunc { color: #7d848f; }
 
+/* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 850px) {
+  .aboutSection {
+    min-height: unset;
+  }
+
+  .heading {
+    margin: 28px 0 20px;
+  }
+
+  .aboutCopy {
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+
   .deviceFrame {
     padding: 20px 14px;
     border-radius: 22px;
@@ -138,12 +152,48 @@
     display: none;
   }
 
+  .codeWindow {
+    border-radius: 14px;
+  }
+
+  .codeTitlebar {
+    padding: 14px 16px;
+  }
+
   .codeBody {
-    padding: 24px 18px 32px;
+    padding: 20px 16px 28px;
     font-size: 12px;
+    line-height: 1.8;
   }
 
   .codeLine {
-    gap: 14px;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .deviceFrame {
+    padding: 14px 8px;
+    border-radius: 16px;
+  }
+
+  .codeBody {
+    padding: 16px 10px 22px;
+    font-size: 11px;
+    line-height: 1.75;
+  }
+
+  .codeLine {
+    gap: 10px;
+  }
+
+  .codeTab {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .traffic i {
+    width: 10px;
+    height: 10px;
   }
 }

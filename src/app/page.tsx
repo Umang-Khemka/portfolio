@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./home.module.css";
-
+import {ArrowUpRight} from "lucide-react";
+ 
 const ROLES = [
   "Backend Engineer",
   "Open Source Contributor",
@@ -388,7 +389,9 @@ export default function HomePage() {
           <p className="eyebrow">Featured work</p>
           <h2 className="heading">Selected Projects</h2>
           <p className="eyebrow">Explore more open source work and experiments on GitHub.</p>
-          <a className="intro-link" href="https://github.com">GitHub ↗</a>
+          <a className="intro-link" href="https://github.com/Umang-Khemka" target="_blank" rel="noopener noreferrer">
+            GitHub <ArrowUpRight size={18} />
+          </a>
         </div>
 
         <article className="project">
@@ -439,10 +442,10 @@ export default function HomePage() {
 
             <div className="project-links">
               <a href="https://github.com/Umang-Khemka/Hopcare-Reactjs" target="_blank" rel="noopener noreferrer">
-                Source code ↗
+                Source code <ArrowUpRight size={18} />
               </a>
               <a href="https://hopcare-reactjs.onrender.com" target="_blank" rel="noopener noreferrer">
-                View project ↗
+                View project <ArrowUpRight size={18} />
               </a>
             </div>
           </div>
@@ -484,10 +487,10 @@ export default function HomePage() {
 
             <div className="project-links">
               <a href="https://github.com/Umang-Khemka/Meetly" target="_blank" rel="noopener noreferrer">
-                Source code ↗
+                Source code <ArrowUpRight size={18} />
               </a>
               <a href="https://meetly-3.onrender.com" target="_blank" rel="noopener noreferrer">
-                View project ↗
+                View project <ArrowUpRight size={18} />
               </a>
             </div>
           </div>
@@ -555,10 +558,10 @@ export default function HomePage() {
 
             <div className="project-links">
               <a href="https://github.com/Umang-Khemka/stayora" target="_blank" rel="noopener noreferrer">
-                Source code ↗
+                Source code <ArrowUpRight size={18} />
               </a>
               <a href="https://stayora-luge.onrender.com" target="_blank" rel="noopener noreferrer">
-                View project ↗
+                View project <ArrowUpRight size={18} />
               </a>
             </div>
           </div>
@@ -611,7 +614,7 @@ export default function HomePage() {
                   ? "Sending…"
                   : formStatus === "error"
                     ? "Failed — try again"
-                    : "Send Message →"}
+                    : <span style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>Send Message <ArrowUpRight size={15} /></span>}
             </button>
           </div>
         </div>

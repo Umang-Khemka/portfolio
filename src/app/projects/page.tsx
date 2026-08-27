@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect } from "react";
 import styles from "./projects.module.css";
+import { ArrowUpRight } from "lucide-react";
 
 export default function ProjectsPage() {
   /* ── Scroll reveal ───────────────────────────────────── */
@@ -51,7 +52,7 @@ export default function ProjectsPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            GitHub ↗
+            GitHub <ArrowUpRight size={18} />
           </a>
         </div>
 
@@ -104,10 +105,10 @@ export default function ProjectsPage() {
 
             <div className="project-links">
               <a href="https://github.com/Umang-Khemka/Hopcare-Reactjs" target="_blank" rel="noopener noreferrer">
-                Source code ↗
+                Source code <ArrowUpRight size={18} />
               </a>
               <a href="https://hopcare-reactjs.onrender.com" target="_blank" rel="noopener noreferrer">
-                View project ↗
+                View project <ArrowUpRight size={18} />
               </a>
             </div>
           </div>
@@ -150,10 +151,10 @@ export default function ProjectsPage() {
 
             <div className="project-links">
               <a href="https://github.com/Umang-Khemka/Meetly" target="_blank" rel="noopener noreferrer">
-                Source code ↗
+                Source code <ArrowUpRight size={18} />
               </a>
               <a href="https://meetly-3.onrender.com" target="_blank" rel="noopener noreferrer">
-                View project ↗
+                View project <ArrowUpRight size={18} />
               </a>
             </div>
           </div>
@@ -221,10 +222,10 @@ export default function ProjectsPage() {
 
             <div className="project-links">
               <a href="https://github.com/Umang-Khemka/stayora" target="_blank" rel="noopener noreferrer">
-                Source code ↗
+                Source code <ArrowUpRight size={18} />
               </a>
               <a href="https://stayora-luge.onrender.com" target="_blank" rel="noopener noreferrer">
-                View project ↗
+                View project <ArrowUpRight size={18} />
               </a>
             </div>
           </div>

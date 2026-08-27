@@ -112,12 +112,22 @@
   background: #7d7d7d;
 }
 
+/* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 850px) {
+  .heroHeading {
+    margin: 20px 0 0;
+  }
+
+  .expSection {
+    padding-top: 60px;
+  }
+
   .expEntry {
     grid-template-columns: 1fr;
     gap: 28px;
-    padding: 20px;
-    margin-bottom: 40px;
+    padding: 24px;
+    margin-bottom: 32px;
+    border-radius: 16px;
   }
 
   .expDivider {
@@ -126,18 +136,65 @@
 
   .expLeft {
     gap: 18px;
+    align-items: center;
   }
 
   .expLogo {
-    width: 110px;
-    height: 110px;
+    width: 90px;
+    height: 90px;
+    border-radius: 16px;
+    padding: 10px;
+    flex-shrink: 0;
   }
 
   .expRole {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .expCompany {
-    font-size: 17px;
+    font-size: 16px;
+  }
+
+  .expDates {
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+
+  .expPoints {
+    gap: 16px;
+  }
+
+  .expPoints li {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+}
+
+@media (max-width: 480px) {
+  .expLeft {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .expLogo {
+    width: 72px;
+    height: 72px;
+    border-radius: 12px;
+  }
+
+  .expEntry {
+    padding: 18px;
+  }
+
+  .expPoints li {
+    font-size: 14px;
+    padding-left: 18px;
+  }
+
+  .expPoints li::before {
+    top: 8px;
+    width: 5px;
+    height: 5px;
   }
 }

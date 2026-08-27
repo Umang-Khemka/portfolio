@@ -136,12 +136,21 @@
   background: var(--red);
 }
 
+/* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 850px) {
+  .heroHeading {
+    margin: 20px 0 0;
+  }
+
+  .eduSection {
+    padding-top: 60px;
+  }
+
   .eduEntry {
     grid-template-columns: 1fr;
-    gap: 28px;
-    padding-bottom: 56px;
-    margin-bottom: 40px;
+    gap: 24px;
+    padding-bottom: 48px;
+    margin-bottom: 36px;
   }
 
   .eduDivider {
@@ -149,15 +158,80 @@
   }
 
   .eduLogo {
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
+    border-radius: 18px;
+    padding: 14px;
+  }
+
+  .eduDegree {
+    font-size: clamp(26px, 6vw, 40px);
+    margin-bottom: 12px;
+  }
+
+  .eduField {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .eduSchool {
+    font-size: 17px;
+    margin-bottom: 16px;
+  }
+
+  .eduDesc {
+    font-size: 14px;
   }
 
   .cards {
     grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 0;
   }
 
   .card {
-    padding: 28px 24px;
+    padding: 26px 22px;
+    border-radius: 14px;
+  }
+
+  .card ul {
+    gap: 12px;
+  }
+
+  .card li {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .eduLogo {
+    width: 96px;
+    height: 96px;
+    border-radius: 14px;
+    padding: 10px;
+  }
+
+  .eduDates {
+    font-size: 10px;
+  }
+
+  .card {
+    padding: 20px 18px;
+  }
+
+  .card h3 {
+    font-size: 11px;
+    margin-bottom: 18px;
+  }
+
+  .card li {
+    font-size: 13px;
+    padding-left: 16px;
+  }
+
+  .card li::before {
+    width: 5px;
+    height: 5px;
+    top: 7px;
   }
 }

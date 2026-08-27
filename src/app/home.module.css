@@ -247,9 +247,9 @@
   padding: 75px 58px;
   background-color: #121110;
   background-image:
-    linear-gradient(#ffffff40 1px, transparent 1px),
-    linear-gradient(90deg, #ffffff40 1px, transparent 1px);
-  background-size: 28px 28px;
+    linear-gradient(#ffffff08 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff08 1px, transparent 1px);
+  background-size: 36px 36px;
 }
 
 .form p {
@@ -294,31 +294,44 @@
 }
 
 /* ── Responsive ─────────────────────────────────────────── */
-@media (max-width: 850px) {
+/* ── Responsive ─────────────────────────────────────────── */
+
+/* ── Tablet (≤ 1100px): start shrinking the GH card ── */
+@media (max-width: 1100px) {
+  .ghWrap {
+    flex: 0 0 560px;
+    width: 560px;
+  }
+
+  .ghCard,
+  .ghUser,
+  .metrics {
+    width: 560px;
+  }
+
+  .contributions {
+    grid-template-columns: repeat(56, 6px);
+    grid-template-rows: repeat(6, 6px);
+    gap: 2px 4px;
+  }
+}
+
+/* ── Tablet (≤ 900px): stack hero bottom row ── */
+@media (max-width: 900px) {
   .hero {
-    grid-template-columns: 1fr;
-    padding-top: 100px;
-    min-height: 900px;
-  }
-
-  .heroTitleRow {
-    top: 16%;
-    gap: 4px;
-  }
-
-  .heroPortrait {
-    width: 32vw;
-    height: 44vw;
-  }
-
-  .role {
-    margin-bottom: 25px;
+    padding: 110px 20px 40px;
+    min-height: 100svh;
   }
 
   .heroBottomRow {
     flex-direction: column;
     align-items: flex-start;
-    padding: 0 16px;
+    gap: 36px;
+    padding: 0;
+  }
+
+  .heroCopy {
+    max-width: 100%;
   }
 
   .ghWrap {
@@ -327,24 +340,23 @@
     align-items: flex-start;
   }
 
-  .ghUser,
-  .ghCard {
-    width: 308px;
-    margin-left: auto;
+  .ghCard,
+  .ghUser {
+    width: 100%;
+    margin-left: 0;
   }
 
   .contributions {
-    grid-template-columns: repeat(28, 6px);
-    grid-template-rows: repeat(9, 6px);
-    gap: 3px 4px;
+    grid-template-columns: repeat(56, 5px);
+    grid-template-rows: repeat(6, 5px);
+    gap: 2px 3px;
   }
 
   .metrics {
-    gap: 8px;
-  }
-
-  .metric span {
-    font-size: 7px;
+    width: 100%;
+    margin-left: 0;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 20px;
   }
 
   .contactBox {
@@ -356,11 +368,129 @@
   }
 
   .quoteImage {
-    min-height: 360px;
+    min-height: 280px;
   }
 
   .form {
     padding: 42px 30px;
+  }
+}
+
+/* ── Mobile (≤ 640px) ── */
+/* ── Mobile (≤ 640px) ── */
+@media (max-width: 640px) {
+  .hero {
+    padding: 90px 16px 32px;
+    min-height: 100svh;
+  }
+
+  /* Stack: UMANG → portrait → KHEMKA, all centered */
+  .heroTitleRow {
+    flex-direction: column;
+    align-items: center;
+    top: 6%;
+    gap: 0px;
+    white-space: normal;
+  }
+
+  .heroName {
+    font-size: clamp(56px, 20vw, 88px);
+    line-height: 1;
+    text-align: center;
+  }
+
+  .heroPortrait {
+    width: 44vw;
+    height: 58vw;
+    order: 0;
+  }
+
+  /* Push bottom content below the stacked title block */
+  .heroBottomRow {
+    margin-top: clamp(280px, 80vw, 420px);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    padding: 0;
+  }
+
+  .heroCopy h1 {
+    font-size: clamp(22px, 5.5vw, 36px);
+  }
+
+  .role {
+    margin-bottom: 16px;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+  }
+
+  .contributions {
+    grid-template-columns: repeat(28, 7px);
+    grid-template-rows: repeat(12, 7px);
+    gap: 2px 3px;
+  }
+
+  .metrics {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .metric strong {
+    font-size: 20px;
+  }
+
+  .metric span {
+    font-size: 7px;
+  }
+
+  .contactTitle {
+    font-size: clamp(36px, 9vw, 60px);
+    margin: 32px 0 40px;
+  }
+
+  .form {
+    padding: 32px 20px;
+  }
+
+  .form p {
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+
+  .form button {
+    width: 100%;
+    text-align: center;
+    padding: 16px;
+  }
+
+  .quoteImage {
+    min-height: 220px;
+  }
+}
+
+/* ── Very small (≤ 400px) ── */
+@media (max-width: 400px) {
+  .heroName {
+    font-size: clamp(48px, 18vw, 72px);
+  }
+
+  .heroPortrait {
+    width: 46vw;
+    height: 62vw;
+  }
+
+  .heroBottomRow {
+    margin-top: clamp(300px, 88vw, 460px);
+  }
+
+  .contributions {
+    grid-template-columns: repeat(28, 6px);
+    grid-template-rows: repeat(12, 6px);
+    gap: 2px;
+  }
+
+  .metrics {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

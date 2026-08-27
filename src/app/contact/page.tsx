@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import styles from "./contact.module.css";
+import { ArrowUpRight } from "lucide-react";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
@@ -78,7 +79,7 @@ export default function ContactPage() {
                 ? "Sending…"
                 : status === "error"
                 ? "Failed — try again"
-                : "Send Message →"}
+                : <span style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>Send Message <ArrowUpRight size={15} /></span>}
             </button>
           </div>
         </div>

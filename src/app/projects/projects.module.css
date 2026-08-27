@@ -111,3 +111,26 @@
   box-shadow:
     0 28px 60px rgba(0, 0, 0, 0.55);
 }
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 850px) {
+  .projectsSection {
+    padding-top: 100px;
+  }
+
+  .project-image-box {
+    height: 100%;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projectsSection {
+    padding-top: 90px;
+  }
+
+  .project-img {
+    width: 94%;
+    max-height: none;
+  }
+}
