@@ -424,10 +424,24 @@
     letter-spacing: 0.3em;
   }
 
+  /* REPLACE with this */
+  .ghCard {
+    width: 100%;
+    overflow: visible;
+  }
+
   .contributions {
-    grid-template-columns: repeat(28, 7px);
-    grid-template-rows: repeat(12, 7px);
+    grid-template-columns: repeat(56, 7px);
+    grid-template-rows: repeat(6, 7px);
     gap: 2px 3px;
+    transform: scale(calc((100vw - 32px) / 504px));
+    transform-origin: top left;
+  }
+
+  .months {
+    transform: scale(calc((100vw - 32px) / 504px));
+    transform-origin: top left;
+    margin-top: 4px;
   }
 
   .metrics {
@@ -466,6 +480,15 @@
   .quoteImage {
     min-height: 220px;
   }
+
+  .contactSection {
+    padding-top: 48px;
+    padding-bottom: 36px;
+  }
+
+  .contactTitle {
+    margin: 20px 0 28px;
+  }
 }
 
 /* ── Very small (≤ 400px) ── */
@@ -484,9 +507,13 @@
   }
 
   .contributions {
-    grid-template-columns: repeat(28, 6px);
-    grid-template-rows: repeat(12, 6px);
-    gap: 2px;
+    transform: scale(calc((100vw - 32px) / 504px));
+    transform-origin: top left;
+  }
+
+  .months {
+    transform: scale(calc((100vw - 32px) / 504px));
+    transform-origin: top left;
   }
 
   .metrics {
@@ -509,18 +536,16 @@
   transform: scale(0.65);
   transform-origin: center center;
 
-  animation: heroPortraitScale 1.25s 0.28s
-    cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: heroPortraitScale 1.25s 0.28s cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
 }
 
 .heroContentIntro {
   opacity: 0;
   transform: translateY(35px);
 
-  animation: heroContentReveal 1s 1.45s
-    cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: heroContentReveal 1s 1.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-
 
 /* ── Name ─────────────────────────────────────────────── */
 
@@ -556,7 +581,6 @@
   }
 }
 
-
 /* ── Portrait ────────────────────────────────────────── */
 
 @keyframes heroPortraitScale {
@@ -574,7 +598,6 @@
     transform: scale(1);
   }
 }
-
 
 /* ── Bottom content ──────────────────────────────────── */
 
